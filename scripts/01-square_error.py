@@ -16,6 +16,7 @@ from numpy.random import normal
 # Parameters #
 #------------#
 N=10            # サンプルを取得する位置 x の個数
+M=[0,1,3,9]     # 多項式の次数
 
 # データセット {x_n,y_n} (n=1...N) を用意
 def create_dataset(num):
@@ -62,7 +63,7 @@ if __name__ == '__main__':
 
     # 多項式近似の曲線を求めて表示
     fig = plt.figure()
-    for c, m in enumerate([0,1,3,9]): # 多項式の次数
+    for c, m in enumerate(M):
         f, ws = resolve(train_set, m)
         df_ws = df_ws.append(Series(ws,name="M=%d" % m))
 
@@ -77,7 +78,7 @@ if __name__ == '__main__':
         # 真の曲線を表示
         linex = np.arange(0,1.01,0.01)
         liney = np.sin(2*np.pi*linex)
-        subplot.plot(linex, liney, color='green')
+        subplot.plot(linex, liney, color='green', linestyle='--')
 
         # 多項式近似の曲線を表示
         linex = np.arange(0,1.01,0.01)
@@ -92,13 +93,14 @@ if __name__ == '__main__':
     fig.show()
 
     # トレーニングセットとテストセットでの誤差の変化を表示
-    df = DataFrame(columns=['Training','Test'])
+    df = DataFrame(columns=['Training set','Test set'])
     for m in range(0,10):   # 多項式の次数
         f, ws = resolve(train_set, m)
         train_error = rms_error(train_set, f)
         test_error = rms_error(test_set, f)
         df = df.append(
-                Series([train_error, test_error], index=['Training','Test']),
-                  ignore_index=True)
-    df.plot(title='RMS Error')
+                Series([train_error, test_error],
+                    index=['Training set','Test set']),
+                ignore_index=True)
+    df.plot(title='RMS Error', style=['-','--'])
     plt.show()

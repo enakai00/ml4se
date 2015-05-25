@@ -14,7 +14,7 @@ from numpy.random import randint, rand
 #------------#
 # Parameters #
 #------------#
-K = 4   # 分類する文字数
+K = 3   # 分類する文字数
 N = 10  # 反復回数
 
 
@@ -61,8 +61,15 @@ if __name__ == '__main__':
     for k in range(K):
         mu[k] /= mu[k].sum()
 
-    # N回のIterationを実施
     fig = plt.figure()
+    for k in range(K):
+        subplot = fig.add_subplot(K, N+1, k*(N+1)+1)
+        subplot.set_xticks([])
+        subplot.set_yticks([])
+        subplot.imshow(mu[k].reshape(28,28), cmap=plt.cm.gray_r)
+    fig.show()
+
+    # N回のIterationを実施
     for iter_num in range(N):
         print "iter_num %d" % iter_num
 
@@ -89,11 +96,11 @@ if __name__ == '__main__':
                 mu[k] += line * resp[k][index]
             mu[k] /= nk
 
-            subplot = fig.add_subplot(K, N, k*N + iter_num + 1)
+            subplot = fig.add_subplot(K, N+1, k*(N+1)+(iter_num+1)+1)
             subplot.set_xticks([])
             subplot.set_yticks([])
             subplot.imshow(mu[k].reshape(28,28), cmap=plt.cm.gray_r)
-    fig.show()
+        fig.show()
 
     # トレーニングセットの文字を分類
     cls = []
