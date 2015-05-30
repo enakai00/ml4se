@@ -16,6 +16,8 @@ from numpy.random import normal
 # Parameters #
 #------------#
 N=10            # サンプルを取得する位置 x の個数
+M=[0,1,3,9]     # 多項式の次数
+
 
 # データセット {x_n,y_n} (n=1...N) を用意
 def create_dataset(num):
@@ -71,7 +73,7 @@ if __name__ == '__main__':
 
     # 多項式近似の曲線を求めて表示
     fig = plt.figure()
-    for c, m in enumerate([0,1,3,9]): # 多項式の次数
+    for c, m in enumerate(M):
         f, ws, sigma = resolve(train_set, m)
         df_ws = df_ws.append(Series(ws,name="M=%d" % m))
 
@@ -86,7 +88,7 @@ if __name__ == '__main__':
         # 真の曲線を表示
         linex = np.arange(0,1.01,0.01)
         liney = np.sin(2*np.pi*linex)
-        subplot.plot(linex, liney, color='green')
+        subplot.plot(linex, liney, color='green', linestyle='--')
 
         # 多項式近似の曲線を表示
         linex = np.arange(0,1.01,0.01)
@@ -108,8 +110,8 @@ if __name__ == '__main__':
         train_mlh.append(log_likelihood(train_set, f))
         test_mlh.append(log_likelihood(test_set, f))
     df = pd.concat([df,
-                    DataFrame(train_mlh, columns=['Training']),
-                    DataFrame(test_mlh, columns=['Test'])],
+                    DataFrame(train_mlh, columns=['Training set']),
+                    DataFrame(test_mlh, columns=['Test set'])],
                     axis=1)
-    df.plot(title='Maximum log likelihood for N=%d' % N)
+    df.plot(title='Maximum log likelihood for N=%d' % N, style=['-','--'])
     plt.show()
