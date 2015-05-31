@@ -21,11 +21,11 @@ if __name__ == '__main__':
         sigma = np.sqrt(np.var(ds))     # 標準偏差の推定値
 
         subplot = fig.add_subplot(2,2,c+1)
-        subplot.set_title("Datapoints=%d" % datapoints)
+        subplot.set_title("N=%d" % datapoints)
         # 真の曲線を表示
         linex = np.arange(-10,10.1,0.1)
         orig = norm(loc=0, scale=1)
-        subplot.plot(linex, orig.pdf(linex), color='green')
+        subplot.plot(linex, orig.pdf(linex), color='green', linestyle='--')
         # 推定した曲線を表示
         est = norm(loc=mu, scale=np.sqrt(sigma))
         label = "Sigma=%.2f" % sigma
