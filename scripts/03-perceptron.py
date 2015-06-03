@@ -51,7 +51,7 @@ def run_simulation(variance, data_graph, param_graph):
     data_graph.scatter(tset2.x, tset2.y, marker='x')
 
     # パラメータの初期値とbias項の設定
-    w0 = w1 = w2 = 0.1
+    w0 = w1 = w2 = 0.0
     bias = 0.5 * (tset.x.mean() + tset.y.mean())
 
     # Iterationを30回実施
@@ -59,7 +59,7 @@ def run_simulation(variance, data_graph, param_graph):
     for i in range(30):
         for index, point in tset.iterrows():
             x, y, type = point.x, point.y, point.type
-            if type * (w0*bias + w1*x + w2*y) < 0:
+            if type * (w0*bias + w1*x + w2*y) <= 0:
                 w0 += type * 1 
                 w1 += type * x
                 w2 += type * y
@@ -70,7 +70,7 @@ def run_simulation(variance, data_graph, param_graph):
     err = 0
     for index, point in tset.iterrows():
         x, y, type = point.x, point.y, point.type
-        if type * (w0*bias + w1*x + w2*y) < 0:
+        if type * (w0*bias + w1*x + w2*y) <= 0:
             err += 1
     err_rate = err * 100 / len(tset)
 
