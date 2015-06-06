@@ -23,8 +23,8 @@ Variances = [5,10,30,50] # 両クラス共通の分散（4種類の分散で計�
 def prepare_dataset(variance):
     n1 = 10
     n2 = 10
-    mu1 = [-3,-3]
-    mu2 = [7,7]
+    mu1 = [7,7]
+    mu2 = [-3,-3]
     cov1 = np.array([[variance,0],[0,variance]])
     cov2 = np.array([[variance,0],[0,variance]])
 
@@ -45,8 +45,8 @@ def run_logistic(tset, subplot):
     t = tset[['type']]
     t = t.as_matrix()
 
-    # 最大100回のIterationを実施
-    for i in range(100):
+    # 最大30回のIterationを実施
+    for i in range(30):
         # IRLS法によるパラメータの修正
         y = np.array([])
         for line in phi:
@@ -83,16 +83,16 @@ def run_logistic(tset, subplot):
 
 # パーセプトロン
 def run_perceptron(tset, subplot):
-    w0 = w1 = w2 = 0.1
+    w0 = w1 = w2 = 0.0
     bias = 0.5 * (tset.x.mean() + tset.y.mean())
 
-    # Iterationを100回実施
-    for i in range(100):
+    # Iterationを30回実施
+    for i in range(30):
         # 確率的勾配降下法によるパラメータの修正
         for index, point in tset.iterrows():
             x, y, type = point.x, point.y, point.type
             type = type*2-1
-            if type * (w0*bias + w1*x + w2*y) < 0:
+            if type * (w0*bias + w1*x + w2*y) <= 0:
                 w0 += type * 1
                 w1 += type * x
                 w2 += type * y
@@ -101,7 +101,7 @@ def run_perceptron(tset, subplot):
     for index, point in tset.iterrows():
         x, y, type = point.x, point.y, point.type
         type = type*2-1
-        if type * (w0*bias + w1*x + w2*y) < 0:
+        if type * (w0*bias + w1*x + w2*y) <= 0:
             err += 1
     err_rate = err * 100 / len(tset)
 
