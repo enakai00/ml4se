@@ -110,7 +110,7 @@ def run_perceptron(tset, subplot):
     linex = np.arange(xmin-5, xmax+5)
     liney = - linex * w1 / w2 - bias * w0 / w2
     label = "ERR %.2f%%" % err_rate
-    subplot.plot(linex,liney,label=label,color='red')
+    subplot.plot(linex, liney, label=label, color='red', linestyle='--')
     subplot.legend(loc=1)
 
 # データを準備してロジスティック回帰とパーセプトロンを実行
