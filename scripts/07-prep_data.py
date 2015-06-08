@@ -45,6 +45,11 @@ while True:
 labels_out.close()
 images_out.close()
 
+# drains remaining data
+labels.stdout.readlines()
+images.stdout.readlines()
+labels = images = None
+
 images = open('sample-images.txt', 'r')
 samples = open('samples.txt', 'w')
 c = 0
