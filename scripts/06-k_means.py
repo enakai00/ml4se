@@ -23,7 +23,9 @@ def run_kmeans(pixels, k):
     center = []
     for i in range(k):
         center.append(np.array([randint(256), randint(256), randint(256)]))
+    print "Initial centers:",
     print map(lambda x: x.tolist(), center)
+    print "========================"
     distortion = 0
 
     # 最大50回のIterationを実施
@@ -52,10 +54,10 @@ def run_kmeans(pixels, k):
             center_new[i] = center_new[i] / num_points[i]
         center = center_new
         print map(lambda x: x.tolist(), center)
-        print "Distortion = %d" % distortion_new
+        print "Distortion: J=%d" % distortion_new
 
-        # Distortion(J)の変化が0.5%未満になったら終了
-        if iter_num > 0 and distortion - distortion_new < distortion * 0.005:
+        # Distortion(J)の変化が0.1%未満になったら終了
+        if iter_num > 0 and distortion - distortion_new < distortion * 0.001:
             break
         distortion = distortion_new
 
@@ -68,7 +70,9 @@ def run_kmeans(pixels, k):
 # Main
 if __name__ == '__main__':
     for k in Colors:
-        print "k=%d" % k
+        print ""
+        print "========================"
+        print "Number of clusters: K=%d" % k
         # 画像ファイルの読み込み
         im = Image.open("photo.jpg")
         pixels = list(im.convert('RGB').getdata())
