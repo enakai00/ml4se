@@ -7,7 +7,7 @@ import pandas as pd
 from pandas import Series, DataFrame
 EOF
 
-echo "alias ipython='ipython --pylab" >> ~/.bahrc
+echo "alias ipython='ipython --pylab'" >> ~/.bashrc
 
 . ~/.bashrc
 
