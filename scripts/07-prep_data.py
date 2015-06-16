@@ -15,15 +15,15 @@ Num = 600           # 抽出する文字数
 Chars = '[036]'     # 抽出する数字（任意の個数の数字を指定可能）
 
 
-labels = Popen(['zcat', 'train-labels.txt.gz'], stdout=PIPE)
-images = Popen(['zcat', 'train-images.txt.gz'], stdout=PIPE)
+labels = open('train-labels.txt', 'r')
+images = open('train-images.txt', 'r')
 labels_out = open('sample-labels.txt', 'w')
 images_out = open('sample-images.txt', 'w')
 chars = re.compile(Chars)
 
 while True:
-    label = labels.stdout.readline()
-    image = images.stdout.readline()
+    label = labels.readline()
+    image = images.readline()
     if (not image) or (not label):
         break
     if not chars.search(label):
@@ -42,13 +42,10 @@ while True:
     if Num == 0:
         break
 
+labels.close()
+images.close()
 labels_out.close()
 images_out.close()
-
-# drains remaining data
-labels.stdout.readlines()
-images.stdout.readlines()
-labels = images = None
 
 images = open('sample-images.txt', 'r')
 samples = open('samples.txt', 'w')
