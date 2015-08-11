@@ -3,7 +3,9 @@ set startdir=%USERPROFILE%\.ipython\profile_default\startup
 set startpy=%startdir%\00-setup.py
 
 setlocal enableextensions
+IF NOT EXIST "%startdir%" (
 md %startdir%
+)
 endlocal
 
 echo import numpy as np > %startpy%
