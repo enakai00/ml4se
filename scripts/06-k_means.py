@@ -26,7 +26,7 @@ def run_kmeans(pixels, k):
     print "Initial centers:",
     print map(lambda x: x.tolist(), center)
     print "========================"
-    distortion = 0
+    distortion = 0.0
 
     # 最大50回のIterationを実施
     for iter_num in range(50): 
@@ -34,7 +34,7 @@ def run_kmeans(pixels, k):
         for i in range(k):
             center_new.append(np.array([0,0,0]))
         num_points = [0] * k
-        distortion_new = 0
+        distortion_new = 0.0
 
         # E Phase: 各データが属するグループ（代表色）を計算
         for pix, point in enumerate(pixels):
