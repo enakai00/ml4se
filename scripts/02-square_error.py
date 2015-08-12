@@ -102,5 +102,5 @@ if __name__ == '__main__':
                 Series([train_error, test_error],
                     index=['Training set','Test set']),
                 ignore_index=True)
-    df.plot(title='RMS Error', style=['-','--'], ylim=(0,0.9))
+    df.plot(title='RMS Error', style=['-','--'], grid=True, ylim=(0,0.9))
     plt.show()
