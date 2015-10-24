@@ -86,12 +86,12 @@ if __name__ == '__main__':
         subplot.scatter(train_set.x, train_set.y, marker='o', color='blue')
 
         # 真の曲線を表示
-        linex = np.arange(0,1.01,0.01)
+        linex = np.linspace(0,1,101)
         liney = np.sin(2*np.pi*linex)
         subplot.plot(linex, liney, color='green', linestyle='--')
 
         # 多項式近似の曲線を表示
-        linex = np.arange(0,1.01,0.01)
+        linex = np.linspace(0,1,101)
         liney = f(linex)
         label = "Sigma=%.2f" % sigma
         subplot.plot(linex, liney, color='red', label=label)
