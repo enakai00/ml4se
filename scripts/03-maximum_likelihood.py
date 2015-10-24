@@ -113,5 +113,5 @@ if __name__ == '__main__':
                     DataFrame(train_mlh, columns=['Training set']),
                     DataFrame(test_mlh, columns=['Test set'])],
                     axis=1)
-    df.plot(title='Log likelihood for N=%d' % N, style=['-','--'])
+    df.plot(title='Log likelihood for N=%d' % N, grid=True, style=['-','--'])
     plt.show()
