@@ -30,7 +30,7 @@ def create_dataset(num):
 
 # 平方根平均二乗誤差（Root mean square error）を計算
 def rms_error(dataset, f):
-    err = 0
+    err = 0.0
     for index, line in dataset.iterrows():
         x, y = line.x, line.y
         err += 0.5 * (y - f(x))**2
@@ -76,12 +76,12 @@ if __name__ == '__main__':
         subplot.scatter(train_set.x, train_set.y, marker='o', color='blue')
 
         # 真の曲線を表示
-        linex = np.arange(0,1.01,0.01)
+        linex = np.linspace(0,1,101)
         liney = np.sin(2*np.pi*linex)
         subplot.plot(linex, liney, color='green', linestyle='--')
 
         # 多項式近似の曲線を表示
-        linex = np.arange(0,1.01,0.01)
+        linex = np.linspace(0,1,101)
         liney = f(linex)
         label = "E(RMS)=%.2f" % rms_error(train_set, f)
         subplot.plot(linex, liney, color='red', label=label)
