@@ -33,8 +33,8 @@ def prepare_dataset(variance):
     df2 = DataFrame(multivariate_normal(mu2,cov2,n2),columns=['x','y'])
     df2['type'] = 0
     df = pd.concat([df1,df2],ignore_index=True)
-    df = df.reindex(np.random.permutation(df.index)).reset_index()
-    return df[['x','y','type']]
+    df = df.reindex(np.random.permutation(df.index)).reset_index(drop=True)
+    return df
 
 # ロジスティック回帰
 def run_logistic(tset, subplot):
