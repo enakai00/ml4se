@@ -40,24 +40,24 @@ def prepare_dataset(variance):
 
 # Perceptronのアルゴリズム（確率的勾配降下法）を実行
 def run_simulation(variance, data_graph, param_graph):
-    tset = prepare_dataset(variance)
-    tset1 = tset[tset['type']==1]
-    tset2 = tset[tset['type']==-1]
-    ymin, ymax = tset.y.min()-5, tset.y.max()+10
-    xmin, xmax = tset.x.min()-5, tset.x.max()+10
+    train_set = prepare_dataset(variance)
+    train_set1 = train_set[train_set['type']==1]
+    train_set2 = train_set[train_set['type']==-1]
+    ymin, ymax = train_set.y.min()-5, train_set.y.max()+10
+    xmin, xmax = train_set.x.min()-5, train_set.x.max()+10
     data_graph.set_ylim([ymin-1, ymax+1])
     data_graph.set_xlim([xmin-1, xmax+1])
-    data_graph.scatter(tset1.x, tset1.y, marker='o')
-    data_graph.scatter(tset2.x, tset2.y, marker='x')
+    data_graph.scatter(train_set1.x, train_set1.y, marker='o')
+    data_graph.scatter(train_set2.x, train_set2.y, marker='x')
 
     # パラメータの初期値とbias項の設定
     w0 = w1 = w2 = 0.0
-    bias = 0.5 * (tset.x.mean() + tset.y.mean())
+    bias = 0.5 * (train_set.x.mean() + train_set.y.mean())
 
     # Iterationを30回実施
     paramhist = DataFrame([[w0,w1,w2]], columns=['w0','w1','w2'])
     for i in range(30):
-        for index, point in tset.iterrows():
+        for index, point in train_set.iterrows():
             x, y, type = point.x, point.y, point.type
             if type * (w0*bias + w1*x + w2*y) <= 0:
                 w0 += type * 1 
@@ -68,11 +68,11 @@ def run_simulation(variance, data_graph, param_graph):
                         ignore_index=True)
     # 判定誤差の計算
     err = 0
-    for index, point in tset.iterrows():
+    for index, point in train_set.iterrows():
         x, y, type = point.x, point.y, point.type
         if type * (w0*bias + w1*x + w2*y) <= 0:
             err += 1
-    err_rate = err * 100 / len(tset)
+    err_rate = err * 100 / len(train_set)
 
     # 結果の表示
     linex = np.arange(xmin-5, xmax+5)
