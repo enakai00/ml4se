@@ -89,6 +89,7 @@ if __name__ == '__main__':
             resp = resp.append([tmp], ignore_index=True)
 
         # M phase
+        mu = np.zeros((K, 28*28))
         for k in range(K):
             nk = resp[k].sum()
             mix[k] = nk/data_num
