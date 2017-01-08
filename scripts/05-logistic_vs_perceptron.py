@@ -122,8 +122,8 @@ def run_simulation(variance, subplot):
     xmin, xmax = train_set.x.min()-5, train_set.x.max()+10
     subplot.set_ylim([ymin-1, ymax+1])
     subplot.set_xlim([xmin-1, xmax+1])
-    subplot.scatter(train_set1.x, train_set1.y, marker='o')
-    subplot.scatter(train_set2.x, train_set2.y, marker='x')
+    subplot.scatter(train_set1.x, train_set1.y, marker='o', label=None)
+    subplot.scatter(train_set2.x, train_set2.y, marker='x', label=None)
 
     run_logistic(train_set, subplot)
     run_perceptron(train_set, subplot)

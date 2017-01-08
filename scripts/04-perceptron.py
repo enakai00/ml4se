@@ -47,8 +47,8 @@ def run_simulation(variance, data_graph, param_graph):
     xmin, xmax = train_set.x.min()-5, train_set.x.max()+10
     data_graph.set_ylim([ymin-1, ymax+1])
     data_graph.set_xlim([xmin-1, xmax+1])
-    data_graph.scatter(train_set1.x, train_set1.y, marker='o')
-    data_graph.scatter(train_set2.x, train_set2.y, marker='x')
+    data_graph.scatter(train_set1.x, train_set1.y, marker='o', label=None)
+    data_graph.scatter(train_set2.x, train_set2.y, marker='x', label=None)
 
     # パラメータの初期値とbias項の設定
     w0 = w1 = w2 = 0.0
@@ -78,7 +78,7 @@ def run_simulation(variance, data_graph, param_graph):
     linex = np.arange(xmin-5, xmax+5)
     liney = - linex * w1 / w2 - bias * w0 / w2
     label = "ERR %.2f%%" % err_rate
-    data_graph.plot(linex,liney,label=label,color='red')
+    data_graph.plot(linex, liney, label=label, color='red')
     data_graph.legend(loc=1)
     paramhist.plot(ax=param_graph)
     param_graph.legend(loc=1)

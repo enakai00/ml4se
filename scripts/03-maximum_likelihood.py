@@ -83,7 +83,8 @@ if __name__ == '__main__':
         subplot.set_title("M=%d" % m)
 
         # トレーニングセットを表示
-        subplot.scatter(train_set.x, train_set.y, marker='o', color='blue')
+        subplot.scatter(train_set.x, train_set.y,
+                        marker='o', color='blue', label=None)
 
         # 真の曲線を表示
         linex = np.linspace(0,1,101)

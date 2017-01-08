@@ -45,8 +45,8 @@ def run_simulation(variance, subplot):
     subplot.set_ylim([ymin-1, ymax+1])
     subplot.set_xlim([xmin-1, xmax+1])
     # 分類データを表示
-    subplot.scatter(training_set1.x, training_set1.y, marker='o')
-    subplot.scatter(training_set2.x, training_set2.y, marker='x')
+    subplot.scatter(training_set1.x, training_set1.y, marker='o', label=None)
+    subplot.scatter(training_set2.x, training_set2.y, marker='x', label=None)
 
     training_set['bias'] = 1
     w = np.array([[0],[0.1],[0.1]])
@@ -90,7 +90,7 @@ def run_simulation(variance, subplot):
     label = "ERR %.2f%%" % err_rate
     subplot.plot(linex,liney ,label=label, color='blue')
     subplot.legend(loc=1)
-    result = training_set.sort_index(by=['probability'], ascending=[False])
+    result = training_set.sort_values(by=['probability'], ascending=[False])
     # 確率付きデータを返却
     return result.reset_index()
 

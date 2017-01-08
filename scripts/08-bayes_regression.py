@@ -91,8 +91,10 @@ if __name__ == '__main__':
         subplot2.set_title("N=%d" % num)
 
         # トレーニングセットを表示
-        subplot1.scatter(train_set.x, train_set.y, marker='o', color='blue')
-        subplot2.scatter(train_set.x, train_set.y, marker='o', color='blue')
+        subplot1.scatter(train_set.x, train_set.y,
+                         marker='o', color='blue', label=None)
+        subplot2.scatter(train_set.x, train_set.y,
+                         marker='o', color='blue', label=None)
 
         linex = np.arange(0,1.01,0.01)
 
