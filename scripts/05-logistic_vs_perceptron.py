@@ -93,7 +93,7 @@ def run_perceptron(train_set, subplot):
             x, y, type = point.x, point.y, point.type
             type = type*2-1
             if type * (w0*bias + w1*x + w2*y) <= 0:
-                w0 += type * 1
+                w0 += type * bias
                 w1 += type * x
                 w2 += type * y
     # 分類誤差の計算

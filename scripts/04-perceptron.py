@@ -60,7 +60,7 @@ def run_simulation(variance, data_graph, param_graph):
         for index, point in train_set.iterrows():
             x, y, type = point.x, point.y, point.type
             if type * (w0*bias + w1*x + w2*y) <= 0:
-                w0 += type * 1 
+                w0 += type * bias
                 w1 += type * x
                 w2 += type * y
         paramhist = paramhist.append(
