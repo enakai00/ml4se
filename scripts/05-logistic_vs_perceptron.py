@@ -65,7 +65,7 @@ def run_logistic(train_set, subplot):
 
     # 分類誤差の計算
     w0, w1, w2 = w[0], w[1], w[2]
-    err = 0
+    err = 0.0
     for index, point in train_set.iterrows():
         x, y, type = point.x, point.y, point.type
         type = type * 2 - 1
@@ -84,7 +84,7 @@ def run_logistic(train_set, subplot):
 # パーセプトロン
 def run_perceptron(train_set, subplot):
     w0 = w1 = w2 = 0.0
-    bias = 0.5 * (train_set.x.mean() + train_set.y.mean())
+    bias = 0.5 * (train_set.x.abs().mean() + train_set.y.abs().mean())
 
     # Iterationを30回実施
     for i in range(30):
@@ -97,7 +97,7 @@ def run_perceptron(train_set, subplot):
                 w1 += type * x
                 w2 += type * y
     # 分類誤差の計算
-    err = 0
+    err = 0.0
     for index, point in train_set.iterrows():
         x, y, type = point.x, point.y, point.type
         type = type*2-1

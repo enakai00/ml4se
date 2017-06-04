@@ -52,7 +52,7 @@ def run_simulation(variance, data_graph, param_graph):
 
     # パラメータの初期値とbias項の設定
     w0 = w1 = w2 = 0.0
-    bias = 0.5 * (train_set.x.mean() + train_set.y.mean())
+    bias = 0.5 * (train_set.x.abs().mean() + train_set.y.abs().mean())
 
     # Iterationを30回実施
     paramhist = DataFrame([[w0,w1,w2]], columns=['w0','w1','w2'])
@@ -67,7 +67,7 @@ def run_simulation(variance, data_graph, param_graph):
                         Series([w0,w1,w2], ['w0','w1','w2']),
                         ignore_index=True)
     # 判定誤差の計算
-    err = 0
+    err = 0.0
     for index, point in train_set.iterrows():
         x, y, type = point.x, point.y, point.type
         if type * (w0*bias + w1*x + w2*y) <= 0:
