@@ -36,3 +36,4 @@ if __name__ == '__main__':
         subplot.set_xlim(-4,4)
         subplot.set_ylim(0)
     fig.show()
+    plt.show()
