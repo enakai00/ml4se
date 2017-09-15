@@ -27,7 +27,7 @@ if __name__ == '__main__':
         orig = norm(loc=0, scale=1)
         subplot.plot(linex, orig.pdf(linex), color='green', linestyle='--')
         # 推定した曲線を表示
-        est = norm(loc=mu, scale=np.sqrt(sigma))
+        est = norm(loc=mu, scale=sigma)
         label = "Sigma=%.2f" % sigma
         subplot.plot(linex, est.pdf(linex), color='red', label=label)
         subplot.legend(loc=1)
